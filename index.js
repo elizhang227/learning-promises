@@ -15,27 +15,24 @@ const willEliGoToHeaven = new Promise(
     }
 )
 
-const askEli = () => {
-    willEliGoToHeaven
-    .then(fulfilled => {
-        console.log(fulfilled, 'Yep!')
-    })
-    .catch(error => {
-        console.log(error.message);
-    })
-}
-
-const letsGo = parks => {
+const letsGo = async (parks) => {
     const message = `Eli is going to ${parks.first} and then ${parks.second}!!`;
-    return Promise.resolve(message);
+    return message;
 };
 
-const askEliAgain = () => {
-    willEliGoToHeaven
-    .then(letsGo)
-    .then(fulfilled => console.log(fulfilled))
-    .catch(error => console.log(error.message));
+const askEli = async () => {
+    const goingToHeaven = await willEliGoToHeaven;
+    console.log(goingToHeaven);
+    const message = await letsGo(goingToHeaven);
+    console.log(message);
 };
 
-askEliAgain()
-//askEli()
+// const askEliAgain = () => {
+//     willEliGoToHeaven
+//     .then(letsGo)
+//     .then(fulfilled => console.log(fulfilled))
+//     .catch(error => console.log(error.message));
+// };
+
+//askEliAgain()
+askEli()
